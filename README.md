@@ -22,3 +22,6 @@ To test the api endpoints for saving questions run :
     `npm run test`
 
 To test, run the command in new terminal and run node backend in different terminal.
+
+
+for testing the Api end point i just Follow the mocha chai testing Framework.
