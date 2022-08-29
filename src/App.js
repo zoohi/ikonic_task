@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
 
-function App() {
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import FormComponent from "./Components/FormComponent";
+import PreviewComponent from "./Components/PreviewComponent";
+
+const App = () => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/question")
+      .then((res) => {
+        setQuestions(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  const [questions, setQuestions] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=" flex w-full justify-between px-12   space-x-8 bg-emerald-800 h-full pb-20">
+      <div>
+        <FormComponent setQuestions={setQuestions} questions={questions} />
+      </div>
+      <div className="w-full ">
+        <PreviewComponent questions={questions} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
